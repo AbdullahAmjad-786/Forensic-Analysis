@@ -1,0 +1,2 @@
+﻿Olx-Path = D:\Work\ForensicAnalysis\com.olx.pk
+Daraz-Path = D:\Work\ForensicAnalysis\com.daraz.android
