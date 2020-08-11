@@ -38,6 +38,7 @@
             this.dgv_category = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnSummary = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_category)).BeginInit();
@@ -53,6 +54,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnSummary);
             this.panel1.Controls.Add(this.lblName);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -152,6 +154,23 @@
             this.panel3.Size = new System.Drawing.Size(1344, 61);
             this.panel3.TabIndex = 2;
             // 
+            // btnSummary
+            // 
+            this.btnSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnSummary.FlatAppearance.BorderSize = 0;
+            this.btnSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSummary.Font = new System.Drawing.Font("Century Gothic", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(120)))), ((int)(((byte)(138)))));
+            this.btnSummary.Location = new System.Drawing.Point(3, 165);
+            this.btnSummary.Name = "btnSummary";
+            this.btnSummary.Size = new System.Drawing.Size(163, 97);
+            this.btnSummary.TabIndex = 5;
+            this.btnSummary.Text = "Summary";
+            this.btnSummary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSummary.UseVisualStyleBackColor = false;
+            this.btnSummary.Visible = false;
+            this.btnSummary.Click += new System.EventHandler(this.btnSummary_Click);
+            // 
             // Daraz
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -186,6 +205,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Button btnSummary;
     }
 }
 

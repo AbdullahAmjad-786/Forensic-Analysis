@@ -38,6 +38,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblName = new System.Windows.Forms.Label();
+            this.btnSummary = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_category)).BeginInit();
             this.panel3.SuspendLayout();
@@ -131,6 +132,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnSummary);
             this.panel1.Controls.Add(this.lblName);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -149,6 +151,23 @@
             this.lblName.TabIndex = 3;
             this.lblName.Text = "label1";
             this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnSummary
+            // 
+            this.btnSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnSummary.FlatAppearance.BorderSize = 0;
+            this.btnSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSummary.Font = new System.Drawing.Font("Century Gothic", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(120)))), ((int)(((byte)(138)))));
+            this.btnSummary.Location = new System.Drawing.Point(3, 166);
+            this.btnSummary.Name = "btnSummary";
+            this.btnSummary.Size = new System.Drawing.Size(163, 97);
+            this.btnSummary.TabIndex = 6;
+            this.btnSummary.Text = "Summary";
+            this.btnSummary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSummary.UseVisualStyleBackColor = false;
+            this.btnSummary.Visible = false;
+            this.btnSummary.Click += new System.EventHandler(this.btnSummary_Click);
             // 
             // Olx
             // 
@@ -184,6 +203,7 @@
         private System.Windows.Forms.Label lblFetch;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Button btnSummary;
     }
 }
 

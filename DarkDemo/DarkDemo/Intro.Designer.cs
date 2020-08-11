@@ -44,6 +44,7 @@
             this.label2.Size = new System.Drawing.Size(582, 92);
             this.label2.TabIndex = 0;
             this.label2.Text = "Forensic Analysis of Android App\r\n                    (Daraz/Olx)";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
