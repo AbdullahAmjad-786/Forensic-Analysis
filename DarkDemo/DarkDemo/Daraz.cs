@@ -267,7 +267,7 @@ namespace DarkDemo
                         count++;
                     }
                 }
-                dgv_category.Rows.Add(id, details[0], details[1], details[2]);
+                dgv_category.Rows.Add(id, details[1], details[2], details[0]);
             }
         } //end of function
 
