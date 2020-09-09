@@ -30,6 +30,7 @@
         {
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnSummary = new System.Windows.Forms.Button();
             this.lblName = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -38,7 +39,8 @@
             this.dgv_category = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnSummary = new System.Windows.Forms.Button();
+            this.lblList = new System.Windows.Forms.Label();
+            this.cmbBuyerList = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_category)).BeginInit();
@@ -62,6 +64,23 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(166, 720);
             this.panel1.TabIndex = 0;
+            // 
+            // btnSummary
+            // 
+            this.btnSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnSummary.FlatAppearance.BorderSize = 0;
+            this.btnSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSummary.Font = new System.Drawing.Font("Century Gothic", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(120)))), ((int)(((byte)(138)))));
+            this.btnSummary.Location = new System.Drawing.Point(3, 165);
+            this.btnSummary.Name = "btnSummary";
+            this.btnSummary.Size = new System.Drawing.Size(163, 97);
+            this.btnSummary.TabIndex = 5;
+            this.btnSummary.Text = "Summary";
+            this.btnSummary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSummary.UseVisualStyleBackColor = false;
+            this.btnSummary.Visible = false;
+            this.btnSummary.Click += new System.EventHandler(this.btnSummary_Click);
             // 
             // lblName
             // 
@@ -93,6 +112,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(40)))), ((int)(((byte)(47)))));
+            this.panel2.Controls.Add(this.lblList);
+            this.panel2.Controls.Add(this.cmbBuyerList);
             this.panel2.Controls.Add(this.lblFetch);
             this.panel2.Controls.Add(this.progressBar1);
             this.panel2.Controls.Add(this.dgv_category);
@@ -154,22 +175,25 @@
             this.panel3.Size = new System.Drawing.Size(1344, 61);
             this.panel3.TabIndex = 2;
             // 
-            // btnSummary
+            // lblList
             // 
-            this.btnSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btnSummary.FlatAppearance.BorderSize = 0;
-            this.btnSummary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSummary.Font = new System.Drawing.Font("Century Gothic", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSummary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(120)))), ((int)(((byte)(138)))));
-            this.btnSummary.Location = new System.Drawing.Point(3, 165);
-            this.btnSummary.Name = "btnSummary";
-            this.btnSummary.Size = new System.Drawing.Size(163, 97);
-            this.btnSummary.TabIndex = 5;
-            this.btnSummary.Text = "Summary";
-            this.btnSummary.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSummary.UseVisualStyleBackColor = false;
-            this.btnSummary.Visible = false;
-            this.btnSummary.Click += new System.EventHandler(this.btnSummary_Click);
+            this.lblList.AutoSize = true;
+            this.lblList.Location = new System.Drawing.Point(17, 6);
+            this.lblList.Name = "lblList";
+            this.lblList.Size = new System.Drawing.Size(124, 21);
+            this.lblList.TabIndex = 12;
+            this.lblList.Text = "Select Buyer Id";
+            this.lblList.Visible = false;
+            // 
+            // cmbBuyerList
+            // 
+            this.cmbBuyerList.FormattingEnabled = true;
+            this.cmbBuyerList.Location = new System.Drawing.Point(147, 3);
+            this.cmbBuyerList.Name = "cmbBuyerList";
+            this.cmbBuyerList.Size = new System.Drawing.Size(186, 29);
+            this.cmbBuyerList.TabIndex = 11;
+            this.cmbBuyerList.Visible = false;
+            this.cmbBuyerList.SelectedIndexChanged += new System.EventHandler(this.cmbBuyerList_SelectedIndexChanged);
             // 
             // Daraz
             // 
@@ -187,6 +211,7 @@
             this.Text = "Daraz";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_category)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -206,6 +231,8 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Button btnSummary;
+        private System.Windows.Forms.Label lblList;
+        private System.Windows.Forms.ComboBox cmbBuyerList;
     }
 }
 

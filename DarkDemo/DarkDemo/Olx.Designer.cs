@@ -31,14 +31,16 @@
             this.button5 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblList = new System.Windows.Forms.Label();
+            this.cmbBuyerList = new System.Windows.Forms.ComboBox();
             this.lblFetch = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.dgv_category = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblName = new System.Windows.Forms.Label();
             this.btnSummary = new System.Windows.Forms.Button();
+            this.lblName = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_category)).BeginInit();
             this.panel3.SuspendLayout();
@@ -74,6 +76,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(40)))), ((int)(((byte)(47)))));
+            this.panel2.Controls.Add(this.lblList);
+            this.panel2.Controls.Add(this.cmbBuyerList);
             this.panel2.Controls.Add(this.lblFetch);
             this.panel2.Controls.Add(this.progressBar1);
             this.panel2.Controls.Add(this.dgv_category);
@@ -82,6 +86,26 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1183, 650);
             this.panel2.TabIndex = 1;
+            // 
+            // lblList
+            // 
+            this.lblList.AutoSize = true;
+            this.lblList.Location = new System.Drawing.Point(17, 6);
+            this.lblList.Name = "lblList";
+            this.lblList.Size = new System.Drawing.Size(124, 21);
+            this.lblList.TabIndex = 10;
+            this.lblList.Text = "Select Buyer Id";
+            this.lblList.Visible = false;
+            // 
+            // cmbBuyerList
+            // 
+            this.cmbBuyerList.FormattingEnabled = true;
+            this.cmbBuyerList.Location = new System.Drawing.Point(147, 3);
+            this.cmbBuyerList.Name = "cmbBuyerList";
+            this.cmbBuyerList.Size = new System.Drawing.Size(186, 29);
+            this.cmbBuyerList.TabIndex = 9;
+            this.cmbBuyerList.Visible = false;
+            this.cmbBuyerList.SelectedIndexChanged += new System.EventHandler(this.cmbBuyerList_SelectedIndexChanged);
             // 
             // lblFetch
             // 
@@ -141,17 +165,6 @@
             this.panel1.Size = new System.Drawing.Size(167, 720);
             this.panel1.TabIndex = 0;
             // 
-            // lblName
-            // 
-            this.lblName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblName.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(3, 70);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(163, 93);
-            this.lblName.TabIndex = 3;
-            this.lblName.Text = "label1";
-            this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // btnSummary
             // 
             this.btnSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
@@ -169,6 +182,17 @@
             this.btnSummary.Visible = false;
             this.btnSummary.Click += new System.EventHandler(this.btnSummary_Click);
             // 
+            // lblName
+            // 
+            this.lblName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblName.Font = new System.Drawing.Font("Times New Roman", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Location = new System.Drawing.Point(3, 70);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(163, 93);
+            this.lblName.TabIndex = 3;
+            this.lblName.Text = "label1";
+            this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Olx
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -184,6 +208,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Olx";
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_category)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -204,6 +229,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Button btnSummary;
+        private System.Windows.Forms.Label lblList;
+        private System.Windows.Forms.ComboBox cmbBuyerList;
     }
 }
 

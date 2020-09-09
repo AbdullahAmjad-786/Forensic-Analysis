@@ -99,11 +99,15 @@ namespace DarkDemo
                     lblName.Text = button_selected;
                     conn.ConnectionString = "Data Source =" + DARAZ_PATH + "\\databases\\RippleDB_1_600017532652_pk";
                     conn.Open();
-                    query = "Select Summary,body From Message";
+                    query = "Select Account_Id From Account";
                     SQLiteCommand cmd = new SQLiteCommand(query, conn);
                     SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
                     da.Fill(dt);
-                    dgv_category.DataSource = dt;
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        cmbBuyerList.Items.Add(dt.Rows[i].ItemArray[0].ToString());
+                    }
+                    //dgv_category.DataSource = dt;
                 }
                 if (button_selected == "Daraz Orders")
                 {
@@ -172,6 +176,13 @@ namespace DarkDemo
             progressBar1.Visible = false;
             lblFetch.Visible = false;
             dgv_category.Visible = true;
+            if (lblName.Text == "Conversations")
+            {
+                lblList.Visible = true;
+                cmbBuyerList.Visible = true;
+                dgv_category.Location = new Point(dgv_category.Location.X, 38);
+                dgv_category.Height = 607;
+            }
         }
 
         private void btnSummary_Click(object sender, EventArgs e)
@@ -384,5 +395,121 @@ namespace DarkDemo
                }
             }
         } //end of function
+
+        void getConverstationData(DataTable conversation_list)
+        {
+            string[] curr_id;
+            for (int i = 0; i < conversation_list.Rows.Count; i++)
+            {
+                curr_id = conversation_list.Rows[i].ItemArray[0].ToString().Split('@');
+                cmbBuyerList.Items.Add(curr_id[0]);
+            }
+        } //end of function
+
+        string getBuyerDetail(string id)
+        {
+            string buyer_detail = "";
+            try
+            {
+                string query;
+                DataTable buyerdata = new DataTable();
+                SQLiteConnection conn = new SQLiteConnection();
+                conn.ConnectionString = "Data Source =" + DARAZ_PATH + "\\databases\\RippleDB_1_600017532652_pk";
+                conn.Open();
+                query = "Select Data From Account Where Account_id =" + "\"" + id + "\"";
+                SQLiteCommand cmd = new SQLiteCommand(query, conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
+                da.Fill(buyerdata);
+                buyer_detail = getBuyerName(buyerdata.Rows[0].ItemArray[0].ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return buyer_detail;
+        } //end of function
+
+        string getBuyerName(string data)
+        {
+            string name = "";
+            string[] details = new string[3];
+            int count = 0;
+            string[] values = data.Trim(new Char[] { '{', '/', '\'', '}', '[', ']' }).Split(',');
+            for (int i = 0; i < values.Length; i++)
+            {
+                if (values.Length > 3)
+                {
+                    if (i != 0)
+                    {
+                        string[] row_text = values[i].Split(':');
+                        if (row_text.Length > 2)
+                            details[count] = row_text[1] + row_text[2];
+                        else if (row_text.Length > 1)
+                            details[count] = row_text[1];
+                        count++;
+                    }
+                }
+                else if (values.Length <= 3)
+                {
+                    string[] row_text = values[i].Split(':');
+                    if (row_text.Length > 2)
+                        details[count] = row_text[1] + row_text[2];
+                    else if (row_text.Length > 1)
+                        details[count] = row_text[1];
+                    count++;
+                }
+            }
+            name = details[1] + "," + details[2];
+            return name;
+        } //end of function
+
+        private void cmbBuyerList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string query, sender_detail;
+                DataTable conv_detail = new DataTable();
+                conv_detail.Clear();
+                SQLiteConnection conn = new SQLiteConnection();
+                conn.ConnectionString = "Data Source =" + DARAZ_PATH + "\\databases\\RippleDB_1_600017532652_pk";
+                conn.Open();
+
+                //get Conversation
+                query = "Select Summary,Create_Time From Message Where Sender_ID =" + "\"" + cmbBuyerList.SelectedItem.ToString() + "\"";
+                SQLiteCommand cmd = new SQLiteCommand(query, conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
+                da.Fill(conv_detail);
+
+                //get buyer details
+                sender_detail = getBuyerDetail(cmbBuyerList.SelectedItem.ToString());
+                string[] row_text = sender_detail.Split(',');
+
+                //Adding data to GridView
+                dgv_category.Rows.Clear();
+                dgv_category.Refresh();
+                dgv_category.ColumnCount = 4;
+                dgv_category.Columns[0].Name = "Buyer Name";
+                dgv_category.Columns[1].Name = "URL";
+                dgv_category.Columns[2].Name = "Text";
+                dgv_category.Columns[3].Name = "Created Time";
+                for (int i = 0; i < conv_detail.Rows.Count; i++)
+                {
+                    dgv_category.Rows.Add(row_text[0], row_text[1], conv_detail.Rows[i].ItemArray[0].ToString(),
+                                          UnixTimeStampToDateTime(Convert.ToDouble(conv_detail.Rows[i].ItemArray[1])).ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        } //end of function
+
+        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddMilliseconds(unixTimeStamp).ToLocalTime();
+            return dtDateTime;
+        }
     }
 }
