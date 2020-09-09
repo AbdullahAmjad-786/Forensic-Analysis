@@ -376,11 +376,12 @@ namespace DarkDemo
 
         void getConverstationData(DataTable conversation_list)
         {
-            string[] curr_id;
+            string[] curr_id,name;
             for(int i=0;i<conversation_list.Rows.Count;i++)
             {
                 curr_id = conversation_list.Rows[i].ItemArray[0].ToString().Split('@');
-                cmbBuyerList.Items.Add(curr_id[0]);
+                name = getBuyerDetail(curr_id[0]).Split(',');
+                cmbBuyerList.Items.Add(name[0].Trim('\"'));
             }
         } //end of function
 
@@ -428,7 +429,7 @@ namespace DarkDemo
             string conv_id = "";
             try
             {
-                string query,sender_detail;
+                string query,sender_detail,sender_id;
                 DataTable conv_detail = new DataTable();
                 conv_detail.Clear();
                 SQLiteConnection conn = new SQLiteConnection();
@@ -436,20 +437,21 @@ namespace DarkDemo
                 conn.Open();
                 
                 //get Conversation Id
-                query = "Select uuid From Conversation Where contactJid like " + "\"" + cmbBuyerList.SelectedItem.ToString() + "%\"";
+                query = "Select id From Profile Where value like " + "\"%" + cmbBuyerList.SelectedItem.ToString().Trim('\"') + "%\"";
                 SQLiteCommand cmd = new SQLiteCommand(query, conn);
                 SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
                 da.Fill(conv_detail);
-                conv_id = conv_detail.Rows[0].ItemArray[0].ToString();
+                sender_id = conv_detail.Rows[0].ItemArray[0].ToString();
+                conv_detail.Clear();
                 
                 //get Conversation
-                query = "Select body,timeSent From Message Where conversationUuid =" + "\"" + conv_id + "\"";
+                query = "Select body,timeSent From Message Where counterpart =" + "\"" + sender_id + "@olxpk\"";
                 cmd = new SQLiteCommand(query, conn);
                 da = new SQLiteDataAdapter(cmd);
                 da.Fill(conv_detail);
 
                 //get buyer details
-                sender_detail = getBuyerDetail(cmbBuyerList.SelectedItem.ToString());
+                sender_detail = getBuyerDetail(sender_id);
                 string[] row_text = sender_detail.Split(',');
                 
                 //Adding data to GridView
@@ -460,7 +462,7 @@ namespace DarkDemo
                 dgv_category.Columns[1].Name = "Phone Number";
                 dgv_category.Columns[2].Name = "Text";
                 dgv_category.Columns[3].Name = "Created Time";
-                for (int i=1;i<conv_detail.Rows.Count;i++)
+                for (int i=0;i<conv_detail.Rows.Count;i++)
                 {
                     dgv_category.Rows.Add(row_text[0], row_text[1], conv_detail.Rows[i].ItemArray[1].ToString(), 
                                           UnixTimeStampToDateTime(Convert.ToDouble(conv_detail.Rows[i].ItemArray[2])).ToString());

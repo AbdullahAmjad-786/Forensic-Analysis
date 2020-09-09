@@ -102,7 +102,7 @@
             this.cmbBuyerList.FormattingEnabled = true;
             this.cmbBuyerList.Location = new System.Drawing.Point(147, 3);
             this.cmbBuyerList.Name = "cmbBuyerList";
-            this.cmbBuyerList.Size = new System.Drawing.Size(186, 29);
+            this.cmbBuyerList.Size = new System.Drawing.Size(342, 29);
             this.cmbBuyerList.TabIndex = 9;
             this.cmbBuyerList.Visible = false;
             this.cmbBuyerList.SelectedIndexChanged += new System.EventHandler(this.cmbBuyerList_SelectedIndexChanged);

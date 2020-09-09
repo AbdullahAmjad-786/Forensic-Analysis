@@ -34,13 +34,13 @@
             this.lblName = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.lblList = new System.Windows.Forms.Label();
+            this.cmbBuyerList = new System.Windows.Forms.ComboBox();
             this.lblFetch = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.dgv_category = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.lblList = new System.Windows.Forms.Label();
-            this.cmbBuyerList = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_category)).BeginInit();
@@ -123,6 +123,26 @@
             this.panel2.Size = new System.Drawing.Size(1184, 654);
             this.panel2.TabIndex = 1;
             // 
+            // lblList
+            // 
+            this.lblList.AutoSize = true;
+            this.lblList.Location = new System.Drawing.Point(17, 6);
+            this.lblList.Name = "lblList";
+            this.lblList.Size = new System.Drawing.Size(124, 21);
+            this.lblList.TabIndex = 12;
+            this.lblList.Text = "Select Buyer Id";
+            this.lblList.Visible = false;
+            // 
+            // cmbBuyerList
+            // 
+            this.cmbBuyerList.FormattingEnabled = true;
+            this.cmbBuyerList.Location = new System.Drawing.Point(147, 3);
+            this.cmbBuyerList.Name = "cmbBuyerList";
+            this.cmbBuyerList.Size = new System.Drawing.Size(342, 29);
+            this.cmbBuyerList.TabIndex = 11;
+            this.cmbBuyerList.Visible = false;
+            this.cmbBuyerList.SelectedIndexChanged += new System.EventHandler(this.cmbBuyerList_SelectedIndexChanged);
+            // 
             // lblFetch
             // 
             this.lblFetch.Font = new System.Drawing.Font("Century Gothic", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -174,26 +194,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1344, 61);
             this.panel3.TabIndex = 2;
-            // 
-            // lblList
-            // 
-            this.lblList.AutoSize = true;
-            this.lblList.Location = new System.Drawing.Point(17, 6);
-            this.lblList.Name = "lblList";
-            this.lblList.Size = new System.Drawing.Size(124, 21);
-            this.lblList.TabIndex = 12;
-            this.lblList.Text = "Select Buyer Id";
-            this.lblList.Visible = false;
-            // 
-            // cmbBuyerList
-            // 
-            this.cmbBuyerList.FormattingEnabled = true;
-            this.cmbBuyerList.Location = new System.Drawing.Point(147, 3);
-            this.cmbBuyerList.Name = "cmbBuyerList";
-            this.cmbBuyerList.Size = new System.Drawing.Size(186, 29);
-            this.cmbBuyerList.TabIndex = 11;
-            this.cmbBuyerList.Visible = false;
-            this.cmbBuyerList.SelectedIndexChanged += new System.EventHandler(this.cmbBuyerList_SelectedIndexChanged);
             // 
             // Daraz
             // 

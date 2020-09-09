@@ -103,10 +103,7 @@ namespace DarkDemo
                     SQLiteCommand cmd = new SQLiteCommand(query, conn);
                     SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
                     da.Fill(dt);
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        cmbBuyerList.Items.Add(dt.Rows[i].ItemArray[0].ToString());
-                    }
+                    getConverstationData(dt);
                     //dgv_category.DataSource = dt;
                 }
                 if (button_selected == "Daraz Orders")
@@ -398,11 +395,13 @@ namespace DarkDemo
 
         void getConverstationData(DataTable conversation_list)
         {
-            string[] curr_id;
+            string curr_id; 
+            string[] name;
             for (int i = 0; i < conversation_list.Rows.Count; i++)
             {
-                curr_id = conversation_list.Rows[i].ItemArray[0].ToString().Split('@');
-                cmbBuyerList.Items.Add(curr_id[0]);
+                curr_id = conversation_list.Rows[i].ItemArray[0].ToString();
+                name = getBuyerDetail(curr_id).Split(',');
+                cmbBuyerList.Items.Add(name[0].Trim('\"'));
             }
         } //end of function
 
@@ -467,21 +466,30 @@ namespace DarkDemo
         {
             try
             {
-                string query, sender_detail;
+                string query, sender_detail, sender_id; 
+                string name = cmbBuyerList.SelectedItem.ToString();
                 DataTable conv_detail = new DataTable();
                 conv_detail.Clear();
                 SQLiteConnection conn = new SQLiteConnection();
                 conn.ConnectionString = "Data Source =" + DARAZ_PATH + "\\databases\\RippleDB_1_600017532652_pk";
                 conn.Open();
 
-                //get Conversation
-                query = "Select Summary,Create_Time From Message Where Sender_ID =" + "\"" + cmbBuyerList.SelectedItem.ToString() + "\"";
+                //get Buyer Id
+                query = "Select Account_id From Account Where Data like " + "\"%" + name.Trim('\"') + "%\"";
                 SQLiteCommand cmd = new SQLiteCommand(query, conn);
                 SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
                 da.Fill(conv_detail);
+                sender_id = conv_detail.Rows[0].ItemArray[0].ToString();
+                conv_detail.Clear();
+
+                //get Conversation
+                query = "Select Summary,Create_Time From Message Where Sender_ID =" + "\"" + sender_id + "\"";
+                cmd = new SQLiteCommand(query, conn);
+                da = new SQLiteDataAdapter(cmd);
+                da.Fill(conv_detail);
 
                 //get buyer details
-                sender_detail = getBuyerDetail(cmbBuyerList.SelectedItem.ToString());
+                sender_detail = getBuyerDetail(sender_id);
                 string[] row_text = sender_detail.Split(',');
 
                 //Adding data to GridView
@@ -494,8 +502,8 @@ namespace DarkDemo
                 dgv_category.Columns[3].Name = "Created Time";
                 for (int i = 0; i < conv_detail.Rows.Count; i++)
                 {
-                    dgv_category.Rows.Add(row_text[0], row_text[1], conv_detail.Rows[i].ItemArray[0].ToString(),
-                                          UnixTimeStampToDateTime(Convert.ToDouble(conv_detail.Rows[i].ItemArray[1])).ToString());
+                    dgv_category.Rows.Add(row_text[0], row_text[1], conv_detail.Rows[i].ItemArray[1].ToString(),
+                                          UnixTimeStampToDateTime(Convert.ToDouble(conv_detail.Rows[i].ItemArray[2])).ToString());
                 }
             }
             catch (Exception ex)
