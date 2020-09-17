@@ -445,7 +445,7 @@ namespace DarkDemo
                 conv_detail.Clear();
                 
                 //get Conversation
-                query = "Select body,timeSent From Message Where counterpart =" + "\"" + sender_id + "@olxpk\"";
+                query = "Select body,timeSent,extras From Message Where counterpart =" + "\"" + sender_id + "@olxpk\"";
                 cmd = new SQLiteCommand(query, conn);
                 da = new SQLiteDataAdapter(cmd);
                 da.Fill(conv_detail);
@@ -457,14 +457,16 @@ namespace DarkDemo
                 //Adding data to GridView
                 dgv_category.Rows.Clear();
                 dgv_category.Refresh();
-                dgv_category.ColumnCount = 4;
+                dgv_category.ColumnCount = 5;
                 dgv_category.Columns[0].Name = "Buyer Name";
-                dgv_category.Columns[1].Name = "Phone Number";
-                dgv_category.Columns[2].Name = "Text";
-                dgv_category.Columns[3].Name = "Created Time";
+                dgv_category.Columns[1].Name = "Sender Type";
+                dgv_category.Columns[2].Name = "Phone Number";
+                dgv_category.Columns[3].Name = "Text";
+                dgv_category.Columns[4].Name = "Created Time";
                 for (int i=0;i<conv_detail.Rows.Count;i++)
                 {
-                    dgv_category.Rows.Add(row_text[0], row_text[1], conv_detail.Rows[i].ItemArray[1].ToString(), 
+                    dgv_category.Rows.Add(row_text[0], getSenderType(conv_detail.Rows[i].ItemArray[3].ToString()), 
+                                          row_text[1], conv_detail.Rows[i].ItemArray[1].ToString(), 
                                           UnixTimeStampToDateTime(Convert.ToDouble(conv_detail.Rows[i].ItemArray[2])).ToString());
                 }
             }
@@ -480,6 +482,22 @@ namespace DarkDemo
             System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
             dtDateTime = dtDateTime.AddMilliseconds(unixTimeStamp).ToLocalTime();
             return dtDateTime;
+        }
+
+        public string getSenderType(string value)
+        {
+            string type = "";
+            string[] rows = value.Split('\n');
+            for(int i=0;i<rows.Length;i++)
+            {
+                if(rows[i].Contains("senderType"))
+                {
+                    string[] values = rows[i].Split('=');
+                    type = values[1].ToString();
+                    break;
+                }
+            }
+            return type;
         }
     }
 }
